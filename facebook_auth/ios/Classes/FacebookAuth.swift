@@ -19,10 +19,12 @@ class FacebookAuth: NSObject {
             return applicationWindow
         }
 
-        if let scene = UIApplication.shared.connectedScenes.first(where: { $0.session.role == .windowApplication }),
-           let sceneDelegate = scene.delegate as? UIWindowSceneDelegate,
-           let window = sceneDelegate.window as? UIWindow  {
-            return window
+        if #available(iOS 13.0, *) {
+            if let scene = UIApplication.shared.connectedScenes.first(where: { $0.session.role == .windowApplication }),
+               let sceneDelegate = scene.delegate as? UIWindowSceneDelegate,
+               let window = sceneDelegate.window as? UIWindow  {
+                return window
+            }
         }
 
         return nil
